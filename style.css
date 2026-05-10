@@ -1,0 +1,500 @@
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* GERAL */
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:#f5f7f9;
+    color:#333;
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+/* MENU */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 8%;
+
+    background:rgba(255,255,255,0.92);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:700;
+    color:#145c43;
+}
+
+.menu{
+    display:flex;
+    gap:30px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#145c43;
+    font-weight:600;
+    transition:0.3s;
+    position:relative;
+}
+
+.menu a::after{
+    content:'';
+    width:0%;
+    height:2px;
+    background:#27ae60;
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    transition:0.3s;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+.menu a:hover{
+    color:#27ae60;
+}
+
+/* HERO */
+
+#hero{
+    position:relative;
+
+    min-height:100vh;
+
+    background:
+    url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=1600');
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:120px 20px;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.7)
+    );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    color:white;
+    max-width:900px;
+
+    animation:fade 1.2s ease;
+}
+
+.tag{
+    display:inline-block;
+
+    background:rgba(255,255,255,0.15);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    margin-bottom:25px;
+
+    backdrop-filter:blur(8px);
+}
+
+.hero-content h1{
+    font-size:64px;
+    line-height:1.2;
+    margin-bottom:25px;
+}
+
+.hero-content p{
+    font-size:22px;
+    opacity:0.95;
+}
+
+/* BOTÃO */
+
+.btn{
+    display:inline-block;
+
+    margin-top:35px;
+
+    padding:17px 38px;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #2ecc71,
+    #27ae60
+    );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:0.4s;
+
+    box-shadow:
+    0 10px 30px rgba(39,174,96,0.35);
+}
+
+.btn:hover{
+    transform:
+    translateY(-6px)
+    scale(1.03);
+
+    box-shadow:
+    0 15px 35px rgba(39,174,96,0.45);
+}
+
+/* ESTATÍSTICAS */
+
+.estatisticas{
+    display:flex;
+    justify-content:center;
+    gap:60px;
+
+    flex-wrap:wrap;
+
+    padding:80px 20px;
+
+    background:white;
+}
+
+.numero{
+    text-align:center;
+}
+
+.numero h3{
+    font-size:52px;
+    color:#27ae60;
+}
+
+.numero p{
+    color:#666;
+}
+
+/* TÍTULOS */
+
+.titulo{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.titulo h2{
+    font-size:42px;
+    color:#145c43;
+    margin-bottom:10px;
+}
+
+.titulo p{
+    color:#777;
+}
+
+/* SERVIÇOS */
+
+#servicos{
+    padding:100px 8%;
+}
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+}
+
+.card{
+    background:
+    rgba(255,255,255,0.9);
+
+    backdrop-filter:blur(10px);
+
+    border:
+    1px solid rgba(255,255,255,0.2);
+
+    padding:40px 30px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+
+    transition:0.4s;
+
+    opacity:0;
+    transform:translateY(40px);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:
+    translateY(-10px)
+    scale(1.02);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.15);
+}
+
+.icone{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    color:#145c43;
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.card p{
+    color:#666;
+}
+
+/* SOBRE */
+
+#sobre{
+    padding:100px 8%;
+}
+
+.sobre-box{
+    background:white;
+
+    padding:70px;
+
+    border-radius:30px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
+
+    text-align:center;
+}
+
+.sobre-box h2{
+    font-size:42px;
+    color:#145c43;
+    margin-bottom:25px;
+}
+
+.sobre-box p{
+    max-width:850px;
+    margin:auto;
+    font-size:20px;
+}
+
+/* DEPOIMENTOS */
+
+#depoimentos{
+    padding:100px 8%;
+    background:#eef7f1;
+}
+
+.estrelas{
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+/* CONTATO */
+
+#contato{
+    padding:100px 8%;
+}
+
+.contato-box{
+    background:
+    linear-gradient(
+    135deg,
+    #145c43,
+    #0b3d2e
+    );
+
+    color:white;
+
+    padding:80px 30px;
+
+    border-radius:30px;
+
+    text-align:center;
+}
+
+.contato-box h2{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.contato-box p{
+    font-size:20px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:68px;
+    height:68px;
+
+    border-radius:50%;
+
+    background:#25d366;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    font-size:32px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.3);
+
+    animation:pulse 2s infinite;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* RESPONSIVO */
+
+@media(max-width:900px){
+
+    .hero-content h1{
+        font-size:42px;
+    }
+
+    .hero-content p{
+        font-size:18px;
+    }
+
+    .menu{
+        gap:18px;
+    }
+
+    .titulo h2,
+    .sobre-box h2,
+    .contato-box h2{
+        font-size:32px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero-content h1{
+        font-size:34px;
+    }
+
+    .hero-content p{
+        font-size:16px;
+    }
+
+    .sobre-box{
+        padding:40px 25px;
+    }
+
+    .sobre-box p{
+        font-size:17px;
+    }
+
+    .contato-box{
+        padding:60px 20px;
+    }
+
+}
