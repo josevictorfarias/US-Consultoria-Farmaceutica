@@ -1,948 +1,278 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US Consultoria Farmacêutica</title>
-  <meta name="description" content="Regularize, organize e cresça sua farmácia com segurança. Atendimento online em todo o Brasil." />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ─── CSS Variables ─── */
-    :root {
-      --green-deep:   #0d3320;
-      --green-dark:   #1a4d32;
-      --green-mid:    #1e6640;
-      --green-light:  #2d8a57;
-      --gold:         #c9a227;
-      --gold-light:   #e8c060;
-      --cream:        #f8f5ef;
-      --white:        #ffffff;
-      --gray-soft:    #f2f0eb;
-      --text-dark:    #1a1a1a;
-      --text-mid:     #3d3d3d;
-      --text-muted:   #7a7a6e;
-      --shadow-lg: 0 20px 60px rgba(13,51,32,.18);
-      --shadow-md: 0 8px 30px rgba(13,51,32,.12);
-      --radius: 18px;
-      --radius-sm: 10px;
-    }
-
-    /* ─── Reset & Base ─── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--cream);
-      color: var(--text-dark);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-
-    /* ─── Scrollbar ─── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--cream); }
-    ::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
-
-    /* ─── Utility ─── */
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
-    .section-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(201,162,39,.13); border: 1px solid rgba(201,162,39,.3);
-      color: var(--gold); font-size: .78rem; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: 6px 16px; border-radius: 100px; margin-bottom: 18px;
-    }
-    .section-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-    h2.section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--green-deep);
-      line-height: 1.15;
-    }
-    h2.section-title span { color: var(--gold); }
-    .section-subtitle {
-      color: var(--text-muted); font-size: 1.05rem;
-      max-width: 560px; margin-top: 14px;
-    }
-
-    /* ─── TOP BAR ─── */
-    .topbar {
-      background: var(--green-deep);
-      color: rgba(255,255,255,.75);
-      font-size: .82rem;
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(201,162,39,.25);
-    }
-    .topbar .container {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-    }
-    .topbar span { display: flex; align-items: center; gap: 6px; }
-    .topbar svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .topbar a:hover { color: var(--gold-light); transition: color .2s; }
-
-    /* ─── HEADER / NAV ─── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,.96);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 2px 20px rgba(13,51,32,.08);
-    }
-    nav {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      padding: 16px 28px;
-      max-width: 1160px; margin: 0 auto;
-      gap: 24px;
-    }
-    .logo {
-      display: flex; align-items: center; gap: 14px;
-    }
-    .logo-icon {
-      width: 52px; height: 52px;
-      background: var(--green-deep);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .logo-icon::after {
-      content: ''; position: absolute;
-      inset: 0; background: linear-gradient(135deg, transparent 50%, rgba(201,162,39,.25));
-    }
-    .logo-letters {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 900;
-      color: var(--white); line-height: 1;
-      position: relative; z-index: 1;
-    }
-    .logo-text { line-height: 1.2; }
-    .logo-text strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--green-deep);
-    }
-    .logo-text small {
-      font-size: .7rem; font-weight: 500;
-      color: var(--gold); text-transform: uppercase; letter-spacing: .1em;
-    }
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-    }
-    .nav-links a {
-      font-size: .92rem; font-weight: 500; color: var(--text-mid);
-      transition: color .2s; position: relative; padding-bottom: 2px;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -2px; left: 0;
-      width: 0; height: 2px; background: var(--gold);
-      transition: width .25s ease;
-    }
-    .nav-links a:hover { color: var(--green-deep); }
-    .nav-links a:hover::after { width: 100%; }
-    .btn-wpp-nav {
-      display: flex; align-items: center; gap: 8px;
-      background: var(--green-mid); color: var(--white);
-      font-size: .88rem; font-weight: 600; padding: 11px 22px;
-      border-radius: 100px; transition: all .25s;
-      white-space: nowrap; box-shadow: 0 4px 15px rgba(30,102,64,.3);
-    }
-    .btn-wpp-nav:hover {
-      background: var(--green-deep);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(30,102,64,.4);
-    }
-    .btn-wpp-nav svg { width: 18px; height: 18px; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--green-deep); transition: all .3s; border-radius: 2px; }
-
-    /* ─── HERO ─── */
-    .hero {
-      background: var(--green-deep);
-      position: relative; overflow: hidden;
-      min-height: 88vh;
-      display: flex; align-items: center;
-    }
-    .hero-bg-pattern {
-      position: absolute; inset: 0; pointer-events: none;
-    }
-    .hero-bg-pattern::before {
-      content: '';
-      position: absolute;
-      top: -120px; right: -120px;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,162,39,.12) 0%, transparent 70%);
-    }
-    .hero-bg-pattern::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: -80px;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(45,138,87,.25) 0%, transparent 70%);
-    }
-    /* geometric lines */
-    .hero-lines {
-      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
-    }
-    .hero-lines svg { position: absolute; opacity: .06; }
-    .hero-lines svg:nth-child(1) { top: 0; right: 0; width: 55%; }
-    .hero-lines svg:nth-child(2) { bottom: 0; left: 0; width: 40%; transform: rotate(180deg); }
-
-    .hero .container {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
-      padding-top: 80px; padding-bottom: 80px;
-      position: relative; z-index: 2;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(201,162,39,.15); border: 1px solid rgba(201,162,39,.35);
-      color: var(--gold-light); font-size: .78rem; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: 7px 18px; border-radius: 100px; margin-bottom: 24px;
-    }
-    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      color: var(--white); line-height: 1.1;
-      margin-bottom: 10px;
-    }
-    .hero h1 .gold { color: var(--gold); }
-    .hero-tagline {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(255,255,255,.75);
-      margin-bottom: 36px;
-      max-width: 480px;
-      font-weight: 300;
-    }
-    .hero-tagline strong { color: var(--gold-light); font-weight: 600; }
-    .hero-ctas {
-      display: flex; flex-wrap: wrap; gap: 14px;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--gold); color: var(--green-deep);
-      font-weight: 700; font-size: .95rem;
-      padding: 15px 30px; border-radius: 100px;
-      transition: all .25s; box-shadow: 0 6px 25px rgba(201,162,39,.4);
-    }
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(201,162,39,.5);
-    }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 10px;
-      border: 2px solid rgba(255,255,255,.3); color: var(--white);
-      font-weight: 600; font-size: .95rem;
-      padding: 15px 30px; border-radius: 100px;
-      transition: all .25s;
-    }
-    .btn-outline:hover {
-      border-color: var(--gold); color: var(--gold);
-      transform: translateY(-3px);
-    }
-    .btn-primary svg, .btn-outline svg { width: 20px; height: 20px; flex-shrink: 0; }
-    .hero-stats {
-      display: flex; gap: 36px; margin-top: 48px;
-      padding-top: 36px; border-top: 1px solid rgba(255,255,255,.1);
-    }
-    .stat { }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem; font-weight: 900; color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: .78rem; color: rgba(255,255,255,.55);
-      text-transform: uppercase; letter-spacing: .08em; margin-top: 4px;
-    }
-
-    /* Hero right card */
-    .hero-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 24px;
-      padding: 36px;
-      backdrop-filter: blur(10px);
-      animation: floatCard 5s ease-in-out infinite;
-    }
-    @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-    .hero-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; color: var(--white);
-      margin-bottom: 24px;
-    }
-    .hero-card-title span { color: var(--gold); }
-    .service-mini-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .service-mini-list li {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 16px;
-      background: rgba(255,255,255,.05);
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.08);
-      transition: all .2s;
-    }
-    .service-mini-list li:hover { background: rgba(201,162,39,.1); border-color: rgba(201,162,39,.25); }
-    .sml-icon {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: var(--green-mid);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .sml-icon svg { width: 18px; height: 18px; color: var(--gold-light); }
-    .sml-text strong { display: block; font-size: .92rem; color: var(--white); }
-    .sml-text small { font-size: .76rem; color: rgba(255,255,255,.5); }
-    .hero-card-footer {
-      margin-top: 20px; padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,.1);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; flex-shrink: 0; }
-    .hero-card-footer span { font-size: .82rem; color: rgba(255,255,255,.6); }
-    .hero-card-footer strong { color: var(--white); }
-
-    /* ─── TRUST BAR ─── */
-    .trust-bar {
-      background: var(--white);
-      border-bottom: 1px solid rgba(13,51,32,.07);
-      padding: 22px 0;
-    }
-    .trust-bar .container {
-      display: flex; align-items: center;
-      justify-content: center; gap: 48px;
-      flex-wrap: wrap;
-    }
-    .trust-item {
-      display: flex; align-items: center; gap: 10px;
-      font-size: .88rem; font-weight: 500; color: var(--text-muted);
-    }
-    .trust-item svg { width: 20px; height: 20px; color: var(--green-mid); }
-
-    /* ─── SERVIÇOS ─── */
-    #servicos { padding: 100px 0; background: var(--cream); }
-    .section-header { margin-bottom: 60px; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .service-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      padding: 36px 30px;
-      border: 1px solid rgba(13,51,32,.07);
-      box-shadow: var(--shadow-md);
-      transition: all .3s cubic-bezier(.22,1,.36,1);
-      position: relative; overflow: hidden;
-    }
-    .service-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, var(--green-mid), var(--gold));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .35s ease;
-    }
-    .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-card.highlight {
-      background: var(--green-deep); border-color: transparent;
-    }
-    .service-card.highlight .service-title { color: var(--white); }
-    .service-card.highlight .service-desc { color: rgba(255,255,255,.65); }
-    .service-card.highlight .service-tag { background: rgba(201,162,39,.2); color: var(--gold-light); }
-    .sc-icon {
-      width: 60px; height: 60px;
-      border-radius: 16px;
-      background: rgba(30,102,64,.1);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 22px;
-    }
-    .service-card.highlight .sc-icon { background: rgba(201,162,39,.15); }
-    .sc-icon svg { width: 28px; height: 28px; color: var(--green-mid); }
-    .service-card.highlight .sc-icon svg { color: var(--gold); }
-    .service-tag {
-      display: inline-block; background: rgba(30,102,64,.08);
-      color: var(--green-mid); font-size: .7rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      padding: 4px 12px; border-radius: 100px; margin-bottom: 12px;
-    }
-    .service-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; color: var(--green-deep);
-      margin-bottom: 12px;
-    }
-    .service-desc { font-size: .92rem; color: var(--text-muted); line-height: 1.65; }
-    .service-items { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
-    .service-items li {
-      display: flex; align-items: center; gap: 8px;
-      font-size: .88rem; color: var(--text-muted);
-    }
-    .service-card.highlight .service-items li { color: rgba(255,255,255,.65); }
-    .service-items li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
-
-    /* ─── SOBRE ─── */
-    #sobre {
-      padding: 100px 0;
-      background: var(--white);
-    }
-    .sobre-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-    .sobre-visual {
-      position: relative;
-    }
-    .sobre-main-box {
-      background: var(--green-deep);
-      border-radius: 24px;
-      padding: 50px 40px;
-      color: var(--white);
-      position: relative; overflow: hidden;
-    }
-    .sobre-main-box::before {
-      content: 'US';
-      position: absolute; top: -20px; right: -10px;
-      font-family: 'Playfair Display', serif;
-      font-size: 10rem; font-weight: 900;
-      color: rgba(255,255,255,.04);
-      line-height: 1;
-    }
-    .sobre-main-box h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem; margin-bottom: 16px;
-      position: relative; z-index: 1;
-    }
-    .sobre-main-box h3 span { color: var(--gold); }
-    .sobre-main-box p { color: rgba(255,255,255,.7); position: relative; z-index: 1; font-size: .95rem; }
-    .sobre-badge-float {
-      position: absolute;
-      bottom: -28px; right: -28px;
-      background: var(--gold);
-      border-radius: 18px;
-      padding: 22px 26px;
-      box-shadow: 0 12px 40px rgba(201,162,39,.4);
-      color: var(--green-deep);
-      text-align: center;
-    }
-    .sobre-badge-float strong { display: block; font-size: 2rem; font-family: 'Playfair Display', serif; line-height: 1; }
-    .sobre-badge-float span { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
-    .sobre-text { padding-left: 12px; }
-    .sobre-text .section-subtitle { max-width: 100%; margin-top: 16px; margin-bottom: 36px; font-size: 1rem; }
-    .pilares { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
-    .pilar {
-      display: flex; gap: 18px; align-items: flex-start;
-      padding: 20px; background: var(--gray-soft);
-      border-radius: 14px; border: 1px solid rgba(13,51,32,.06);
-    }
-    .pilar-icon {
-      width: 46px; height: 46px; border-radius: 12px;
-      background: var(--green-deep);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .pilar-icon svg { width: 22px; height: 22px; color: var(--gold); }
-    .pilar-text strong { display: block; font-size: .95rem; color: var(--green-deep); margin-bottom: 4px; }
-    .pilar-text span { font-size: .85rem; color: var(--text-muted); }
-
-    /* ─── CANAL WHATSAPP ─── */
-    #canal { padding: 100px 0; background: var(--cream); }
-    .canal-card {
-      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%);
-      border-radius: 30px; padding: 60px;
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 40px; align-items: center;
-      position: relative; overflow: hidden;
-      box-shadow: var(--shadow-lg);
-    }
-    .canal-card::before {
-      content: ''; position: absolute;
-      top: -100px; right: 200px;
-      width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,162,39,.15) 0%, transparent 70%);
-    }
-    .canal-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(201,162,39,.2); border: 1px solid rgba(201,162,39,.4);
-      color: var(--gold-light); font-size: .76rem; font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: 6px 16px; border-radius: 100px; margin-bottom: 20px;
-    }
-    .canal-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      color: var(--white); line-height: 1.15; margin-bottom: 16px;
-      position: relative; z-index: 1;
-    }
-    .canal-card h2 span { color: var(--gold); }
-    .canal-card p { color: rgba(255,255,255,.7); font-size: 1rem; max-width: 500px; position: relative; z-index: 1; }
-    .canal-btns { display: flex; flex-direction: column; gap: 14px; z-index: 1; position: relative; }
-    .btn-canal {
-      display: flex; align-items: center; gap: 12px;
-      background: #25d366; color: var(--white);
-      font-weight: 700; font-size: .92rem;
-      padding: 16px 28px; border-radius: 14px;
-      white-space: nowrap; transition: all .25s;
-      box-shadow: 0 6px 20px rgba(37,211,102,.35);
-    }
-    .btn-canal:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(37,211,102,.5); background: #20b558; }
-    .btn-canal svg { width: 22px; height: 22px; flex-shrink: 0; }
-    .btn-canal-insta {
-      display: flex; align-items: center; gap: 12px;
-      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-      color: var(--white); font-weight: 700; font-size: .92rem;
-      padding: 16px 28px; border-radius: 14px;
-      white-space: nowrap; transition: all .25s;
-      box-shadow: 0 6px 20px rgba(131,58,180,.35);
-    }
-    .btn-canal-insta:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(131,58,180,.5); filter: brightness(1.1); }
-    .btn-canal-insta svg { width: 22px; height: 22px; flex-shrink: 0; }
-
-    /* ─── PROCESSO ─── */
-    #processo { padding: 100px 0; background: var(--white); }
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 60px; position: relative; }
-    .steps::before {
-      content: ''; position: absolute;
-      top: 38px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
-      height: 2px; background: linear-gradient(90deg, var(--green-mid), var(--gold));
-      z-index: 0;
-    }
-    .step { text-align: center; position: relative; z-index: 1; }
-    .step-num {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: var(--green-deep); color: var(--gold);
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; font-weight: 900;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 22px; border: 3px solid var(--cream);
-      box-shadow: 0 0 0 4px var(--green-mid);
-    }
-    .step h4 { font-size: 1rem; color: var(--green-deep); margin-bottom: 8px; font-weight: 700; }
-    .step p { font-size: .84rem; color: var(--text-muted); }
-
-    /* ─── CTA / FINAL ─── */
-    #contato {
-      padding: 100px 0;
-      background: var(--green-deep);
-      position: relative; overflow: hidden;
-    }
-    #contato::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(201,162,39,.1) 0%, transparent 60%);
-    }
-    .cta-content {
-      text-align: center; position: relative; z-index: 1;
-      max-width: 680px; margin: 0 auto;
-    }
-    .cta-content .section-tag { margin: 0 auto 22px; display: flex; width: fit-content; }
-    .cta-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--white); line-height: 1.15; margin-bottom: 18px;
-    }
-    .cta-content h2 span { color: var(--gold); }
-    .cta-content p { color: rgba(255,255,255,.65); margin-bottom: 42px; font-size: 1.05rem; }
-    .cta-btns { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
-    .btn-wpp-cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: #25d366; color: var(--white);
-      font-weight: 700; font-size: 1rem;
-      padding: 17px 34px; border-radius: 100px;
-      box-shadow: 0 6px 25px rgba(37,211,102,.4);
-      transition: all .25s;
-    }
-    .btn-wpp-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(37,211,102,.5); }
-    .btn-wpp-cta svg { width: 22px; height: 22px; }
-    .btn-insta-cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: transparent;
-      border: 2px solid rgba(255,255,255,.25); color: var(--white);
-      font-weight: 600; font-size: 1rem;
-      padding: 17px 34px; border-radius: 100px;
-      transition: all .25s;
-    }
-    .btn-insta-cta:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
-    .btn-insta-cta svg { width: 22px; height: 22px; }
-    .cta-phone {
-      margin-top: 40px; color: rgba(255,255,255,.5);
-      font-size: .9rem;
-    }
-    .cta-phone strong { color: var(--gold-light); font-size: 1.15rem; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: #070f0a;
-      padding: 50px 0 30px;
-      color: rgba(255,255,255,.5);
-    }
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 48px; padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .footer-brand .logo { margin-bottom: 16px; }
-    .footer-brand .logo-text strong { color: rgba(255,255,255,.9); }
-    .footer-brand p { font-size: .88rem; line-height: 1.7; max-width: 280px; }
-    .footer-col h5 {
-      font-size: .78rem; text-transform: uppercase; letter-spacing: .14em;
-      color: var(--gold); font-weight: 700; margin-bottom: 20px;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a { font-size: .88rem; transition: color .2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 28px; font-size: .8rem; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-bottom a { color: var(--gold); }
-
-    /* ─── FLOATING WPP BUTTON ─── */
-    .float-wpp {
-      position: fixed; bottom: 28px; right: 28px;
-      width: 60px; height: 60px; border-radius: 50%;
-      background: #25d366;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 25px rgba(37,211,102,.5);
-      z-index: 999;
-      transition: all .25s;
-      animation: floatWpp 3s ease-in-out infinite;
-    }
-    @keyframes floatWpp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-    .float-wpp:hover { transform: scale(1.12) !important; box-shadow: 0 10px 35px rgba(37,211,102,.6); }
-    .float-wpp svg { width: 28px; height: 28px; color: var(--white); }
-
-    /* ─── ANIMATIONS ─── */
-    .fade-up {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ─── MOBILE ─── */
-    @media (max-width: 900px) {
-      .hero .container { grid-template-columns: 1fr; gap: 40px; }
-      .hero-card { display: none; }
-      .sobre-grid { grid-template-columns: 1fr; }
-      .sobre-visual { display: none; }
-      .sobre-text { padding-left: 0; }
-      .canal-card { grid-template-columns: 1fr; }
-      .canal-btns { flex-direction: row; flex-wrap: wrap; }
-      .steps { grid-template-columns: 1fr 1fr; }
-      .steps::before { display: none; }
-      .footer-top { grid-template-columns: 1fr; gap: 36px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-    }
-    @media (max-width: 600px) {
-      .steps { grid-template-columns: 1fr; }
-      .hero-stats { flex-wrap: wrap; gap: 24px; }
-      .canal-card { padding: 36px 28px; }
-      nav { padding: 14px 20px; }
-    }
-
-    /* ─── Mobile Menu Overlay ─── */
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(13,51,32,.97);
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 36px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem; color: var(--white);
-      font-weight: 700; transition: color .2s;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-    .mobile-close {
-      position: absolute; top: 24px; right: 28px;
-      font-size: 2rem; color: var(--white); cursor: pointer; background: none; border: none;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>US Consultoria Farmacêutica</title>
+<meta name="description" content="Regularize, organize e cresça sua Empresa com segurança. Atendimento online em todo o Brasil."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- ── FLOATING WPP ── -->
-<a class="float-wpp" href="https://wa.me/5563992050375?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20US%20Consultoria%20Farmacêutica." target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
-</a>
-
-<!-- ── MOBILE MENU ── -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="toggleMenu()">✕</button>
-  <a href="#servicos" onclick="toggleMenu()">Serviços</a>
-  <a href="#sobre" onclick="toggleMenu()">Sobre</a>
-  <a href="#canal" onclick="toggleMenu()">Canal</a>
-  <a href="#processo" onclick="toggleMenu()">Como Funciona</a>
-  <a href="#contato" onclick="toggleMenu()">Contato</a>
-</div>
-
-<!-- ── TOP BAR ── -->
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="container">
     <span>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-      Atendimento online em todo o Brasil
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (63) 99205-0375
     </span>
     <span>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
-      <a href="https://wa.me/5563992050375" target="_blank">63 99205-0375</a>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+      <a href="https://wa.me/5563992050375" target="_blank" rel="noopener">WhatsApp</a>
     </span>
   </div>
 </div>
 
-<!-- ── HEADER ── -->
+<!-- HEADER -->
 <header>
   <nav>
-    <div class="logo">
-      <div class="logo-icon"><span class="logo-letters">US</span></div>
-      <div class="logo-text">
-        <strong>US Consultoria</strong>
-        <small>Farmacêutica</small>
-      </div>
-    </div>
+    <a href="#" class="logo">
+      <div class="logo-icon"><div class="logo-letters">US</div></div>
+      <div class="logo-text"><strong>US Consultoria</strong><small>Farmacêutica</small></div>
+    </a>
     <ul class="nav-links">
+      <li><a href="#segmentos">Segmentos</a></li>
       <li><a href="#servicos">Serviços</a></li>
       <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#canal">Canal</a></li>
-      <li><a href="#processo">Como Funciona</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
-    <a class="btn-wpp-nav" href="https://wa.me/5563992050375?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20US%20Consultoria%20Farmacêutica." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
-      Fale Conosco
+    <a href="https://wa.me/5563992050375?text=Olá!%20Gostaria%20de%20um%20atendimento%20da%20US%20Consultoria%20Farmacêutica." class="btn-wpp-nav" target="_blank" rel="noopener">
+      Atendimento
     </a>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </nav>
 </header>
 
-<!-- ── HERO ── -->
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="#segmentos" onclick="toggleMenu()">Segmentos</a>
+  <a href="#servicos" onclick="toggleMenu()">Serviços</a>
+  <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+  <a href="#contato" onclick="toggleMenu()">Contato</a>
+</div>
+
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-pattern"></div>
+  <div class="hero-bg"></div>
   <div class="hero-lines">
-    <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="300" cy="300" r="280" stroke="white" stroke-width="1"/>
-      <circle cx="300" cy="300" r="200" stroke="white" stroke-width="1"/>
-      <circle cx="300" cy="300" r="120" stroke="white" stroke-width="1"/>
-      <line x1="0" y1="300" x2="600" y2="300" stroke="white" stroke-width="1"/>
-      <line x1="300" y1="0" x2="300" y2="600" stroke="white" stroke-width="1"/>
-    </svg>
-    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="50" y="50" width="300" height="300" stroke="white" stroke-width="1"/>
-      <rect x="100" y="100" width="200" height="200" stroke="white" stroke-width="1"/>
-      <rect x="150" y="150" width="100" height="100" stroke="white" stroke-width="1"/>
-    </svg>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 C 20 0 50 0 100 100 Z" fill="none" stroke="white" stroke-width="0.1"/></svg>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 C 20 0 50 0 100 100 Z" fill="none" stroke="white" stroke-width="0.1"/></svg>
   </div>
   <div class="container">
-    <div class="hero-text">
-      <div class="hero-badge"><span class="dot"></span> Consultoria Especializada</div>
-      <h1>Regularize, organize e <span class="gold">cresça</span> sua farmácia</h1>
-      <p class="hero-tagline">Soluções completas para impulsionar sua farmácia e drogaria. <strong>Atendimento online em todo o Brasil.</strong></p>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Especialistas em Regulação Sanitária</div>
+      <h1>Sua Empresa <span class="gold">100% Regularizada</span> perante a ANVISA.</h1>
+      <p class="hero-tag">Consultoria farmacêutica de alto padrão para <strong>Empresas, Distribuidoras e Indústrias</strong>. Do zero à operação legal.</p>
       <div class="hero-ctas">
-        <a class="btn-primary" href="https://wa.me/5563992050375?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20US%20Consultoria%20Farmacêutica." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
-          Falar no WhatsApp
-        </a>
-        <a class="btn-outline" href="#servicos">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6m-3 8v4m-2-2h4"/></svg>
-          Ver Serviços
-        </a>
+        <button class="btn-primary" onclick="openModal()">
+          Solicitar Orçamento
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <a href="#segmentos" class="btn-outline">Ver Segmentos</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Online no Brasil</div></div>
-        <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Serviços especializados</div></div>
-        <div class="stat"><div class="stat-num">✓</div><div class="stat-label">Suporte completo</div></div>
+        <div class="stat"><div class="stat-num">+7</div><div class="stat-label">Anos de Exp.</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Aprovação</div></div>
+        <div class="stat"><div class="stat-num">Todo</div><div class="stat-label">o Brasil</div></div>
       </div>
     </div>
-
     <div class="hero-card">
-      <div class="hero-card-title"><span>Nossos</span> Serviços</div>
-      <ul class="service-mini-list">
-        <li>
-          <div class="sml-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <div class="sml-text"><strong>SNGPC</strong><small>Sistema Nacional de Gerenciamento</small></div>
-        </li>
-        <li>
-          <div class="sml-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-          <div class="sml-text"><strong>AFE ANVISA</strong><small>Concessão e Alteração</small></div>
-        </li>
-        <li>
-          <div class="sml-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/></svg></div>
-          <div class="sml-text"><strong>AE</strong><small>Autorização Especial</small></div>
-        </li>
-        <li>
-          <div class="sml-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
-          <div class="sml-text"><strong>Farmácia Popular</strong><small>Credenciamento e Renovação</small></div>
-        </li>
-        <li>
-          <div class="sml-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6m-6 8 2 2 4-4"/></svg></div>
-          <div class="sml-text"><strong>SNCR</strong><small>Sistema Nac. de Controle de Receituários</small></div>
-        </li>
+      <h3 class="hc-title">Segurança <span>Normativa</span></h3>
+      <ul class="sml">
+        <li><div class="sml-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="sml-t"><strong>Conformidade Total</strong><small>Zero riscos com a vigilância</small></div></li>
+        <li><div class="sml-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="sml-t"><strong>Agilidade em Processos</strong><small>Prazos reduzidos na ANVISA</small></div></li>
+        <li><div class="sml-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><div class="sml-t"><strong>Gestão Documental</strong><small>Toda documentação organizada</small></div></li>
       </ul>
-      <div class="hero-card-footer">
-        <div class="online-dot"></div>
-        <span>Atendimento online em <strong>todo o Brasil</strong></span>
-      </div>
+      <div class="hc-foot"><div class="online-dot"></div><span>Consultores <strong>Online agora</strong></span></div>
     </div>
   </div>
 </section>
 
-<!-- ── TRUST BAR ── -->
-<div class="trust-bar">
+<!-- TRUST BAR -->
+<div class="trust">
   <div class="container">
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-      Segurança e Conformidade
-    </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6"/></svg>
-      Organização e Agilidade
-    </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Foco no Seu Negócio
-    </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/><polyline points="16,7 22,7 22,13"/></svg>
-      Resultados que Geram Crescimento
-    </div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Regularização ANVISA</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Certificação de Boas Práticas</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Gestão de SNGPC</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Autorização de Funcionamento</div>
   </div>
 </div>
 
-<!-- ── SERVIÇOS ── -->
-<section id="servicos">
+<!-- SEGMENTOS -->
+<section id="segmentos">
   <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-tag">Nossos Serviços</div>
-      <h2 class="section-title">Tudo que sua <span>farmácia precisa</span></h2>
-      <p class="section-subtitle">Soluções completas para regularizar, organizar e impulsionar sua farmácia ou drogaria com segurança.</p>
+    <div class="seg-head">
+      <div class="stag">Nossas Áreas</div>
+      <h2 class="stitle">Qual é o seu <span>segmento?</span></h2>
+      <p class="ssub">Clique no serviço desejado para conhecer os detalhes e solicitar um atendimento focado na sua necessidade.</p>
     </div>
-    <div class="services-grid">
-
-      <div class="service-card fade-up">
-        <div class="sc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <div class="seg-grid">
+      <button class="seg-btn featured" onclick="openModalWithSegment('Empresa')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">Empresa: Regularização Completa</span>
+            <span class="seg-sub">Consultoria técnica para legalização e conformidade total do seu estabelecimento.</span>
+          </div>
         </div>
-        <span class="service-tag">Sistema Federal</span>
-        <h3 class="service-title">SNGPC</h3>
-        <p class="service-desc">Sistema Nacional de Gerenciamento de Produtos Controlados. Garantimos sua conformidade com a ANVISA.</p>
-        <ul class="service-items">
-          <li>Implantação completa</li>
-          <li>Regularização do sistema</li>
-          <li>Suporte contínuo</li>
-        </ul>
-      </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
 
-      <div class="service-card highlight fade-up">
-        <div class="sc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      <button class="seg-btn" onclick="openModalWithSegment('SNGPC')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">SNGPC — Sistema Nacional de Gerenciamento</span>
+            <span class="seg-sub">Implantação e suporte no gerenciamento de produtos controlados e conformidade ANVISA.</span>
+          </div>
         </div>
-        <span class="service-tag">ANVISA</span>
-        <h3 class="service-title">AFE ANVISA</h3>
-        <p class="service-desc">Autorização de Funcionamento de Empresa perante a ANVISA — obrigatória para farmacias e drogarias.</p>
-        <ul class="service-items">
-          <li>Concessão da AFE</li>
-          <li>Alteração da AFE</li>
-        </ul>
-      </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
 
-      <div class="service-card fade-up">
-        <div class="sc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/></svg>
+      <button class="seg-btn" onclick="openModalWithSegment('AFE')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">AFE — Autorização de Funcionamento</span>
+            <span class="seg-sub">Concessão, alteração e regularização da autorização obrigatória para operar legalmente.</span>
+          </div>
         </div>
-        <span class="service-tag">Autorização Especial</span>
-        <h3 class="service-title">AE</h3>
-        <p class="service-desc">Autorização Especial para medicamentos sujeitos a controle especial — obtenção e regularização.</p>
-        <ul class="service-items">
-          <li>Obtenção da autorização</li>
-          <li>Regularização junto à ANVISA</li>
-        </ul>
-      </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
 
-      <div class="service-card fade-up">
-        <div class="sc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+      <button class="seg-btn" onclick="openModalWithSegment('AE')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">Autorização Especial — AE</span>
+            <span class="seg-sub">Obtenção e regularização de AE para medicamentos sujeitos a controle especial.</span>
+          </div>
         </div>
-        <span class="service-tag">Programa Federal</span>
-        <h3 class="service-title">Farmácia Popular</h3>
-        <p class="service-desc">Credenciamento, renovação e adequação da sua farmácia ao Programa Farmácia Popular do Brasil.</p>
-        <ul class="service-items">
-          <li>Credenciamento inicial</li>
-          <li>Renovação do contrato</li>
-          <li>Adequação dos requisitos</li>
-        </ul>
-      </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
 
-      <div class="service-card fade-up" style="position:relative;">
-        <div style="position:absolute;top:18px;right:18px;background:var(--gold);color:var(--green-deep);font-size:.68rem;font-weight:800;padding:4px 12px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase;">Novo</div>
-        <div class="sc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6m-6 8 2 2 4-4"/></svg>
+      <button class="seg-btn" onclick="openModalWithSegment('SNCR')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">SNCR — Controle de Receituários</span>
+            <span class="seg-sub">Implantação completa e regularização do sistema nacional de controle de receituários.</span>
+          </div>
         </div>
-        <span class="service-tag">Novo Serviço</span>
-        <h3 class="service-title">SNCR</h3>
-        <p class="service-desc">Sistema Nacional de Controle de Receituários — implantação e regularização completa para sua farmácia.</p>
-        <ul class="service-items">
-          <li>Implantação do sistema</li>
-          <li>Regularização e suporte</li>
-        </ul>
-      </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
 
+      <button class="seg-btn" onclick="openModalWithSegment('CBPDA')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">CBPDA — Boas Práticas de Distribuição</span>
+            <span class="seg-sub">Certificação essencial para distribuidoras e armazenadoras garantirem qualidade e segurança.</span>
+          </div>
+        </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
+
+      <button class="seg-btn" onclick="openModalWithSegment('CBPF')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20"/><path d="M5 20V8l7-4 7 4v12"/><path d="M9 20v-4h6v4"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">CBPF — Boas Práticas de Fabricação</span>
+            <span class="seg-sub">Obtenção de certificados de fabricação, manuais técnicos e auditorias de conformidade industrial.</span>
+          </div>
+        </div>
+        <div class="btn-soli-seg">Solicitar</div>
+      </button>
+
+      <button class="seg-btn seg-btn-novo" onclick="openModalWithSegment('Venda de Farmácia')">
+        <div class="seg-left">
+          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <div class="seg-info">
+            <span class="seg-name">Assessoria em Venda de Farmácia</span>
+            <span class="seg-sub">Consultoria especializada para vender sua farmácia com segurança, estratégia e máxima valorização do negócio.</span>
+          </div>
+        </div>
+        <div class="btn-soli-seg novo-badge">Solicitar</div>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- ── SOBRE ── -->
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <div class="sec-hd">
+      <div class="stag">Especialidades</div>
+      <h2 class="stitle">O que fazemos por <span>você</span></h2>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="srv-tag">Regulatório</div>
+        <h3 class="srv-title">Regularização ANVISA</h3>
+        <p class="srv-desc">Gestão completa para obtenção e renovação de licenças sanitárias.</p>
+        <ul class="srv-items">
+          <li>Concessão de AFE</li>
+          <li>Autorização Especial (AE)</li>
+          <li>Licença Sanitária Local</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="srv-tag">Qualidade</div>
+        <h3 class="srv-title">Certificação de Boas Práticas</h3>
+        <p class="srv-desc">Implementação completa de normas técnicas e operacionais.</p>
+        <ul class="srv-items">
+          <li>CBPDA — Distribuição e Armazenagem</li>
+          <li>CBPF — Boas Práticas de Fabricação</li>
+          <li>Manuais e Procedimentos (POPs)</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <div class="srv-tag">Operacional</div>
+        <h3 class="srv-title">Gestão de Controlados e Programas</h3>
+        <p class="srv-desc">Suporte especializado para sistemas nacionais e credenciamentos.</p>
+        <ul class="srv-items">
+          <li>SNGPC — Gerenciamento de Controlados</li>
+          <li>SNCR — Controle de Receituários</li>
+          <li>Credenciamento Farmácia Popular</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
 <section id="sobre">
   <div class="container">
     <div class="sobre-grid">
-      <div class="sobre-visual fade-up">
-        <div class="sobre-main-box">
-          <h3>Compromisso, ética e <span>responsabilidade</span></h3>
-          <p>Atendimento personalizado com foco total no sucesso da sua farmácia. Cada cliente é único e merece soluções sob medida.</p>
-        </div>
-        <div class="sobre-badge-float">
-          <strong>100%</strong>
-          <span>Online no Brasil</span>
+      <div class="sobre-visual">
+        <div class="sobre-box">
+          <h3>Sua Segurança <span>Sanitária</span> é nossa prioridade.</h3>
+          <p>Com anos de experiência no mercado regulatório, a US Consultoria Farmacêutica nasceu para simplificar processos complexos e garantir que sua empresa opere com tranquilidade.</p>
+          <div class="sobre-badge">
+            <strong>+7</strong>
+            <span>Anos de Exp.</span>
+          </div>
         </div>
       </div>
-      <div class="sobre-text fade-up">
-        <div class="section-tag">Sobre Nós</div>
-        <h2 class="section-title">Especialistas em <span>consultoria farmacêutica</span></h2>
-        <p class="section-subtitle">A US Consultoria Farmacêutica nasceu com o propósito de simplificar a vida do farmacêutico e do dono de farmácia, garantindo conformidade legal e crescimento sustentável.</p>
+      <div class="sobre-text">
+        <div class="stag">Quem Somos</div>
+        <h2 class="stitle">Especialistas em <span>Resultados.</span></h2>
+        <p class="ssub">Não entregamos apenas papéis, entregamos a viabilidade do seu negócio. Nossa metodologia é focada em agilidade e conformidade técnica rigorosa.</p>
         <div class="pilares">
           <div class="pilar">
-            <div class="pilar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
-            <div class="pilar-text">
-              <strong>Segurança e Conformidade</strong>
-              <span>Sua farmácia sempre regularizada e protegida legalmente.</span>
-            </div>
+            <div class="pilar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="pilar-t"><strong>Foco Técnico</strong><span>Consultores farmacêuticos especializados em legislação.</span></div>
           </div>
           <div class="pilar">
-            <div class="pilar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
-            <div class="pilar-text">
-              <strong>Agilidade e Organização</strong>
-              <span>Processos rápidos e eficientes para não travar seu negócio.</span>
-            </div>
-          </div>
-          <div class="pilar">
-            <div class="pilar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/><polyline points="16,7 22,7 22,13"/></svg></div>
-            <div class="pilar-text">
-              <strong>Resultados que Crescem</strong>
-              <span>Foco no desenvolvimento sustentável do seu estabelecimento.</span>
-            </div>
+            <div class="pilar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="pilar-t"><strong>Segurança Jurídica</strong><span>Processos blindados contra autuações e multas.</span></div>
           </div>
         </div>
       </div>
@@ -950,169 +280,180 @@
   </div>
 </section>
 
-<!-- ── CANAL WHATSAPP E INSTAGRAM ── -->
+<!-- CANAL -->
 <section id="canal">
   <div class="container">
-    <div class="canal-card fade-up">
-      <div>
-        <div class="canal-tag">📢 Fique por Dentro</div>
-        <h2>Siga nosso <span>Canal Oficial</span> no WhatsApp</h2>
-        <p>Receba dicas, novidades e atualizações sobre o mundo farmacêutico direto no seu WhatsApp. Conteúdo exclusivo e gratuito para farmacêuticos e proprietários de farmácia.</p>
+    <div class="canal-card">
+      <div class="canal-info">
+        <div class="canal-tag">Dicas &amp; Novidades</div>
+        <h2>Acompanhe nosso <span>Canal Oficial</span></h2>
+        <p>Fique por dentro das atualizações da ANVISA, prazos regulatórios e dicas exclusivas para o seu negócio farmacêutico.</p>
       </div>
       <div class="canal-btns">
-        <a class="btn-canal" href="https://whatsapp.com/channel/0029VaGtr4FGpLHXN0La9H0K" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
-          Entrar no Canal WPP
+        <a href="https://whatsapp.com/channel/0029VaGtr4FGpLHXN0La9H0K" target="_blank" rel="noopener" class="btn-canal">
+          Canal no WhatsApp
         </a>
-        <a class="btn-canal-insta" href="https://www.instagram.com/us_consultoria_farma/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Seguir no Instagram
+        <a href="https://www.instagram.com/us_consultoria_farma/" target="_blank" rel="noopener" class="btn-insta">
+          Siga no Instagram
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── COMO FUNCIONA ── -->
+<!-- PROCESSO -->
 <section id="processo">
   <div class="container">
-    <div class="section-header fade-up" style="text-align:center;">
-      <div class="section-tag" style="margin:0 auto;">Como Funciona</div>
-      <h2 class="section-title">Processo <span>simples e rápido</span></h2>
-      <p class="section-subtitle" style="margin:14px auto 0;">Da consulta ao resultado, cuidamos de tudo para você.</p>
+    <div class="sec-hd" style="text-align:center">
+      <div class="stag">Metodologia</div>
+      <h2 class="stitle">Como trabalhamos</h2>
     </div>
     <div class="steps">
-      <div class="step fade-up">
-        <div class="step-num">1</div>
-        <h4>Entre em Contato</h4>
-        <p>Fale conosco pelo WhatsApp e nos conte sobre sua farmácia e sua necessidade.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">2</div>
-        <h4>Análise Gratuita</h4>
-        <p>Avaliamos a situação regulatória do seu estabelecimento sem custo inicial.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">3</div>
-        <h4>Plano de Ação</h4>
-        <p>Criamos um plano personalizado com prazos claros e transparentes.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">4</div>
-        <h4>Resultado Garantido</h4>
-        <p>Sua farmácia regularizada, organizada e pronta para crescer.</p>
-      </div>
+      <div class="step"><div class="step-num">01</div><h4>Diagnóstico</h4><p>Analisamos a situação atual da sua empresa e documentos.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Planejamento</h4><p>Traçamos a rota mais rápida para a regularização total.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Execução</h4><p>Protocolamos e acompanhamos tudo junto aos órgãos.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Conformidade</h4><p>Sua empresa pronta para operar com segurança 100%.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTATO / CTA ── -->
+<!-- CONTATO -->
 <section id="contato">
   <div class="container">
-    <div class="cta-content fade-up">
-      <div class="section-tag" style="background:rgba(201,162,39,.15);border-color:rgba(201,162,39,.3);color:var(--gold-light);">Fale Conosco</div>
-      <h2>Pronto para <span>regularizar</span> sua farmácia?</h2>
-      <p>Não deixe sua farmácia em risco. Entre em contato agora e receba um atendimento personalizado, com comprometimento e ética.</p>
+    <div class="cta-c">
+      <div class="stag">Fale Conosco</div>
+      <h2>Pronto para <span>Regularizar</span> sua Empresa?</h2>
+      <p>Não deixe para depois. Evite multas e garanta o crescimento do seu negócio agora mesmo.</p>
       <div class="cta-btns">
-        <a class="btn-wpp-cta" href="https://wa.me/5563992050375?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20US%20Consultoria%20Farmacêutica." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
-          Falar no WhatsApp
-        </a>
-        <a class="btn-insta-cta" href="https://www.instagram.com/us_consultoria_farma/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Ver Instagram
+        <button class="btn-wpp-cta" onclick="openModal()">
+          Solicitar Orçamento
+        </button>
+        <a href="https://www.instagram.com/us_consultoria_farma/" target="_blank" rel="noopener" class="btn-insta-cta">
+          Nosso Instagram
         </a>
       </div>
-      <div class="cta-phone">
-        Ou ligue / mande mensagem: <strong>63 99205-0375</strong>
-      </div>
+      <div class="cta-phone">Ou fale agora: <strong>(63) 99205-0375</strong></div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="logo">
-          <div class="logo-icon"><span class="logo-letters">US</span></div>
-          <div class="logo-text">
-            <strong>US Consultoria</strong>
-            <small>Farmacêutica</small>
-          </div>
-        </div>
-        <p>Regularize, organize e cresça sua farmácia com segurança. Atendimento online em todo o Brasil.</p>
+        <a href="#" class="logo">
+          <div class="logo-icon"><div class="logo-letters">US</div></div>
+          <div class="logo-text"><strong>US Consultoria</strong><small>Farmacêutica</small></div>
+        </a>
+        <p>Especialistas em regulação sanitária e consultoria farmacêutica em todo o Brasil.</p>
       </div>
-      <div class="footer-col">
+      <div class="fcol">
         <h5>Serviços</h5>
-        <ul class="footer-links">
-          <li><a href="#servicos">SNGPC</a></li>
-          <li><a href="#servicos">AFE ANVISA</a></li>
-          <li><a href="#servicos">AE</a></li>
-          <li><a href="#servicos">Farmácia Popular</a></li>
-          <li><a href="#servicos">SNCR</a></li>
+        <ul class="flinks">
+          <li><a href="#segmentos">Empresas</a></li>
+          <li><a href="#segmentos">SNGPC / SNCR</a></li>
+          <li><a href="#segmentos">AFE / AE</a></li>
+          <li><a href="#segmentos">CBPDA / CBPF</a></li>
+          <li><a href="#segmentos">Venda de Farmácia</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h5>Contato</h5>
-        <ul class="footer-links">
-          <li><a href="https://wa.me/5563992050375" target="_blank">WhatsApp: 63 99205-0375</a></li>
-          <li><a href="https://www.instagram.com/us_consultoria_farma/" target="_blank">Instagram</a></li>
-          <li><a href="https://whatsapp.com/channel/0029VaGtr4FGpLHXN0La9H0K" target="_blank">Canal no WhatsApp</a></li>
+      <div class="fcol">
+        <h5>Empresa</h5>
+        <ul class="flinks">
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#canal">Canal Oficial</a></li>
+          <li><a href="https://www.instagram.com/us_consultoria_farma/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#contato">Fale Conosco</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2025 US Consultoria Farmacêutica. Todos os direitos reservados.</span>
-      <span>Atendimento online em todo o Brasil 🇧🇷</span>
+    <div class="footer-bot">
+      <p>&copy; 2025 US Consultoria Farmacêutica. Todos os direitos reservados.</p>
+      <p>Atendimento online em todo o Brasil 🇧🇷</p>
     </div>
   </div>
 </footer>
 
-<!-- ── FAVICON SVG inline (gerado via JS) ── -->
-<script>
-  // Favicon dinâmico
-  (function() {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-      <rect width="64" height="64" rx="14" fill="#0d3320"/>
-      <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#c9a227" stroke-width="2.5"/>
-      <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Georgia,serif" font-weight="900" font-size="30" fill="#ffffff">US</text>
-    </svg>`;
-    const blob = new Blob([svg], {type: 'image/svg+xml'});
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('link');
-    link.rel = 'icon'; link.type = 'image/svg+xml'; link.href = url;
-    document.head.appendChild(link);
-  })();
+<!-- MODAL ORÇAMENTO -->
+<div class="modal-overlay" id="modalOrc" onclick="closeModalOut(event)">
+  <div class="modal-box" onclick="event.stopImmediatePropagation()">
+    <div class="modal-header">
+      <h2>Solicitar <span>Orçamento</span></h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-tabs">
+        <button class="ftab active" onclick="switchTab('pj')">🏢 Pessoa Jurídica</button>
+        <button class="ftab" onclick="switchTab('pf')">👤 Pessoa Física</button>
+      </div>
 
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
+      <!-- PJ -->
+      <div class="fpanel active" id="panel-pj">
+        <h3>Solicite já o seu Orçamento — <span>Pessoa Jurídica</span></h3>
+        <form id="form-pj">
+          <div class="fgroup">
+            <div class="field"><label>CNPJ</label><input type="text" id="cnpj" placeholder="00.000.000/0000-00" required/></div>
+            <div class="field"><label>Pessoa para Contato</label><input type="text" id="contato-pj" placeholder="Nome completo" required/></div>
+            <div class="field"><label>Telefone — Celular (Preferência WhatsApp)</label><input type="tel" id="tel-pj" placeholder="(00) 00000-0000" required/></div>
+            <div class="field"><label>E-mail</label><input type="email" id="email-pj" placeholder="seu@email.com.br"/></div>
+            <div class="field">
+              <label>Segmento</label>
+              <select id="seg-pj">
+                <option value="">Selecione seu segmento</option>
+                <option value="Empresa">Empresa — Regularização Completa</option>
+                <option value="SNGPC">SNGPC</option>
+                <option value="AFE">AFE</option>
+                <option value="AE">AE</option>
+                <option value="SNCR">SNCR</option>
+                <option value="CBPDA">CBPDA</option>
+                <option value="CBPF">CBPF</option>
+                <option value="Venda de Farmácia">Venda de Farmácia</option>
+              </select>
+            </div>
+            <div class="field"><label>Solicitação</label><textarea id="sol-pj" placeholder="Descreva sua necessidade..."></textarea></div>
+          </div>
+          <button type="button" class="btn-solicitar" onclick="enviarWpp('pj')">📱 Solicitar via WhatsApp</button>
+        </form>
+      </div>
 
-  // Intersection observer for fade-up
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      <!-- PF -->
+      <div class="fpanel" id="panel-pf">
+        <h3>Solicite já o seu Orçamento — <span>Pessoa Física</span></h3>
+        <form id="form-pf">
+          <div class="fgroup">
+            <div class="field"><label>CPF</label><input type="text" id="cpf" placeholder="000.000.000-00" required/></div>
+            <div class="field"><label>Nome</label><input type="text" id="nome-pf" placeholder="Seu nome completo" required/></div>
+            <div class="field"><label>Celular (Preferência WhatsApp)</label><input type="tel" id="tel-pf" placeholder="(00) 00000-0000" required/></div>
+            <div class="field"><label>E-mail</label><input type="email" id="email-pf" placeholder="seu@email.com.br"/></div>
+            <div class="field">
+              <label>Segmento</label>
+              <select id="seg-pf">
+                <option value="">Selecione seu segmento</option>
+                <option value="Empresa">Empresa — Regularização Completa</option>
+                <option value="SNGPC">SNGPC</option>
+                <option value="AFE">AFE</option>
+                <option value="AE">AE</option>
+                <option value="SNCR">SNCR</option>
+                <option value="CBPDA">CBPDA</option>
+                <option value="CBPF">CBPF</option>
+                <option value="Venda de Farmácia">Venda de Farmácia</option>
+              </select>
+            </div>
+            <div class="field"><label>Solicitação</label><textarea id="sol-pf" placeholder="Descreva sua necessidade..."></textarea></div>
+          </div>
+          <button type="button" class="btn-solicitar" onclick="enviarWpp('pf')">📱 Solicitar via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-  // Smooth active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === `#${cur}` ? 'var(--green-deep)' : '';
-    });
-  });
-</script>
+<!-- FLOAT WPP -->
+<a class="float-wpp" href="https://wa.me/5563992050375?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20da%20US%20Consultoria%20Farmacêutica." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.844L.057 23.571l5.866-1.539A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.856a9.847 9.847 0 0 1-5.035-1.381l-.36-.214-3.741.981.999-3.648-.236-.374A9.847 9.847 0 0 1 2.143 12C2.143 6.556 6.556 2.143 12 2.143S21.856 6.556 21.856 12 17.444 21.856 12 21.856z"/></svg>
+</a>
+
+<script src="script.js"></script>
 </body>
 </html>
