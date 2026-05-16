@@ -1,2 +1,2 @@
-🔗 Acesse o projeto:
-https://github.com/josevictorfarias/US-Consultoria-Farmaceutica
+🔗 Acesse o site:
+https://josevictorfarias.github.io/US-Consultoria-Farmaceutica/
