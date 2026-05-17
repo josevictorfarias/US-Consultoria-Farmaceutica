@@ -130,9 +130,17 @@
 
     <div class="seg-grid">
 
+           <!-- 1: Empresa -->
       <button class="seg-btn featured" onclick="openModalWithSegment('Empresa')">
         <div class="seg-left">
-          <div class="seg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div class="seg-ico seg-ico-img">
+            <!-- Logo US Consultoria (SVG inline) -->
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gu" x1="0" x2="1"><stop offset="0%" stop-color="#003524"/><stop offset="100%" stop-color="#006b47"/></linearGradient></defs>
+              <rect width="64" height="64" rx="10" fill="url(#gu)"/>
+              <text x="50%" y="54%" font-family="serif" font-size="28" font-weight="900" fill="#c9a227" text-anchor="middle" dominant-baseline="middle">US</text>
+            </svg>
+          </div>
           <div class="seg-info">
             <span class="seg-name">Empresa: Regularização Completa</span>
             <span class="seg-sub">Consultoria técnica para legalização e conformidade total do seu estabelecimento.</span>
@@ -207,19 +215,46 @@
         <div class="btn-soli-seg">Solicitar</div>
       </button>
 
-      <!-- 8º segmento — Verde, emoji de venda, nome corrigido -->
-      <button class="seg-btn seg-btn-venda" onclick="openModalWithSegment('Venda de Farmácia')">
-        <div class="seg-left">
-          <div class="seg-ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 7h11M10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
-          </div>
-          <div class="seg-info">
-            <span class="seg-name">Venda de Farmácias</span>
-            <span class="seg-sub">Consultoria especializada para vender sua farmácia com segurança, estratégia e máxima valorização do negócio.</span>
-          </div>
-        </div>
-        <div class="btn-soli-seg">Solicitar</div>
-      </button>
+      <!-- 8: Venda de Farmácias — Verde -->
+<button class="seg-btn seg-btn-venda" onclick="openModalWithSegment('Venda de Farmácia')">
+  <div class="seg-left">
+    <div class="seg-ico seg-ico-img">
+      <!-- Logo US Consultoria (SVG inline) -->
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gu-venda" x1="0" x2="1">
+            <stop offset="0%" stop-color="#003524"/>
+            <stop offset="100%" stop-color="#006b47"/>
+          </linearGradient>
+        </defs>
+
+        <rect width="64" height="64" rx="10" fill="url(#gu-venda)"/>
+
+        <text 
+          x="50%" 
+          y="54%" 
+          font-family="serif" 
+          font-size="28" 
+          font-weight="900" 
+          fill="#c9a227" 
+          text-anchor="middle" 
+          dominant-baseline="middle">
+          US
+        </text>
+      </svg>
+    </div>
+
+    <div class="seg-info">
+      <span class="seg-name">Venda de Farmácias</span>
+
+      <span class="seg-sub">
+        Consultoria especializada para vender sua farmácia com segurança, estratégia e máxima valorização do negócio.
+      </span>
+    </div>
+  </div>
+
+  <div class="btn-soli-seg">Solicitar</div>
+</button>
 
     </div>
   </div>
@@ -343,8 +378,16 @@
           <li>Auditorias de conformidade industrial</li>
         </ul>
       </div>
+       <!-- Venda de Farmácias -->
       <div class="srv-card srv-card-venda">
-        <div class="srv-ico srv-ico-venda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 7h11M10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></div>
+        <div class="srv-ico-logo srv-ico-logo-venda">
+          <!-- Logo US para Venda de Farmácias -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style="width:56px;height:56px;border-radius:12px">
+            <defs><linearGradient id="gv2" x1="0" x2="1"><stop offset="0%" stop-color="#003524"/><stop offset="100%" stop-color="#006b47"/></linearGradient></defs>
+            <rect width="64" height="64" rx="10" fill="url(#gv2)"/>
+            <text x="50%" y="54%" font-family="serif" font-size="28" font-weight="900" fill="#c9a227" text-anchor="middle" dominant-baseline="middle">US</text>
+          </svg>
+        </div>
         <div class="srv-tag srv-tag-venda">Assessoria Especializada</div>
         <h3 class="srv-title">Venda de Farmácias</h3>
         <p class="srv-desc">Assessoria especializada para vender sua farmácia com segurança, estratégia e máxima valorização do negócio.</p>
@@ -441,7 +484,7 @@
       <h2 class="stitle">Como trabalhamos</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><h4>Diagnóstico</h4><p>Analisamos a situação atual da sua empresa e documentos.</p></div>
+      <div class="step"><div class="step-num">01</div><h4>Análise</h4><p>Analisamos a situação atual da sua empresa e documentos.</p></div>
       <div class="step"><div class="step-num">02</div><h4>Planejamento</h4><p>Traçamos a rota mais rápida para a regularização total.</p></div>
       <div class="step"><div class="step-num">03</div><h4>Execução</h4><p>Protocolamos e acompanhamos tudo junto aos órgãos.</p></div>
       <div class="step"><div class="step-num">04</div><h4>Conformidade</h4><p>Sua empresa pronta para operar com segurança 100%.</p></div>
@@ -503,7 +546,7 @@
       </div>
     </div>
     <div class="footer-bot">
-      <p>&copy; 2025 US Consultoria Farmacêutica. Todos os direitos reservados.</p>
+      <p>&copy; 2026 US Consultoria Farmacêutica. Todos os direitos reservados.</p>
       <p>Atendimento online em todo o Brasil 🇧🇷</p>
     </div>
   </div>
